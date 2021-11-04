@@ -6,7 +6,7 @@ let schema = null;
 const DB_URL = process.env.MONGO_DB_URL || 'mongodb://localhost:27017/webchat/';
 const DB_NAME = process.env.DB_NAME || 'taskManager';
 
-async function connection() {
+const connection = async () => {
   if (schema) return Promise.resolve(schema);
   return MongoClient
     .connect(DB_URL, {
@@ -22,6 +22,6 @@ async function connection() {
       console.error(err);
       process.exit(1);
     });
-}
+};
 
 module.exports = connection;
