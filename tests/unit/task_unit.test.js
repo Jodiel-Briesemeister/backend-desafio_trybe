@@ -83,4 +83,23 @@ describe('testes unitários', () => {
       expect(response[0].status).to.be.equal('pronto');
     });
   });
+
+  describe('Quando uma tarefa é adicionada', () => {
+    let response;
+    before(async function () {
+      const newTask = {
+        task: 'task 99',
+        status: 'pendente',
+      };
+
+      await taskModels.addTask(newTask);
+      
+      response = await taskModels.getTasks();
+    });
+    it('deve atualizar o array', function () {
+      expect(response.length).to.be.equal(2);
+      expect(response[1].task).to.be.equal('task 99');
+      expect(response[1].status).to.be.equal('pendente');
+    });
+  });
 });
